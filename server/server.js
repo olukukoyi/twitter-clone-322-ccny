@@ -20,13 +20,15 @@ const authorizeToken = async (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader.split(" ")[1];
 
-  if (token == null) {
+  if (token == undefined || token == null) {
     console.log("empty token");
+
     return res.sendStatus(404);
   }
 
   jwt.verify(token, process.env.ACCSS_TOKEN_SECRET, async (err, user) => {
     if (err) {
+      console.log("running");
       try {
         // try and generate a new token b/c it expired
         let refreshToken = req.cookies["refresh-token"];
@@ -42,20 +44,19 @@ const authorizeToken = async (req, res, next) => {
           body: JSON.stringify({ token: refreshToken }),
         });
         const result = await data.json();
-        // if (result.status !== 200) {
-        //   console.log("failed");
-        //   return res.json({ error: "error" });
-        // }
+
         res.cookie("access-token", result.newAccessToken, {
           maxAge: 15000,
         });
-        console.log("res: ", result.newAccessToken);
-        return res.json({ inner: "generated new token , i hope" });
+        console.log("generated new token ,");
+        next();
       } catch (error) {
         console.log("error: ", error);
+        next();
       }
     }
-    return res.json({ outter: " token is still valid" });
+    console.log("token is still valid");
+    next();
   });
 };
 
@@ -73,4 +74,6 @@ app.post("/user/token", userRoutes.creatingNewToken);
 
 // post
 app.get("/post", authorizeToken, postRoutes.getAllPost);
+app.get("/post/:id", authorizeToken, postRoutes.getUserPost);
+app.post("/post/createPost", authorizeToken, postRoutes.createPost);
 // ----------

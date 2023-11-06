@@ -1,0 +1,9 @@
+signout function
+
+search for users
+
+followers (follow user)
+
+double check error handling
+
+tatter backend functionality to project goal (trendy user, etc)

@@ -48,7 +48,7 @@ const login = async (req, res) => {
 
     if (existingUser.password === password) {
       const token = jwt.sign({ id, name }, process.env.ACCSS_TOKEN_SECRET, {
-        expiresIn: "15s",
+        expiresIn: "10m",
       });
       const refreshToken = jwt.sign(
         { id, name },
@@ -57,17 +57,9 @@ const login = async (req, res) => {
 
       // store tokens in cookies
       res.cookie("access-token", token, {
-        maxAge: 15000,
+        maxAge: 600000,
       });
       res.cookie("refresh-token", refreshToken);
-
-      // storing refresh token in db
-      // const updatedUserAndToken = await prisma.user.update({
-      //   where: { email: email },
-      //   data: {
-      //     refreshToken: refreshToken,
-      //   },
-      // });
 
       return res.json({
         user: existingUser,
@@ -78,15 +70,13 @@ const login = async (req, res) => {
 
     res.json({ user: newUser });
   } catch (err) {
-    console.log(err);
     return res.json({ error: err });
   }
 };
 
-const creatingNewToken = (req, res) => {
+const creatingNewToken = (req, res, next) => {
   // fix this up , watch vid to set up this function
   const token = req.body.token; // this should be the refresh token
-  console.log("from /token: ", req.body);
   if (token == null) {
     console.log("empty token");
     return res.sendStatus(401);
@@ -98,20 +88,33 @@ const creatingNewToken = (req, res) => {
     }
 
     // create new access token
-    console.log("generating...");
+    console.log("generating new token...");
     const accessToken = jwt.sign(
       { id: user.id },
       process.env.ACCSS_TOKEN_SECRET,
       {
-        expiresIn: "15s",
+        expiresIn: "10m",
       }
     );
 
-    console.log("NEW ACCESS TOKEN FROM /TOKEN: ", accessToken, user);
-    return res.json({ newAccessToken: accessToken, user: user });
+    console.log("NEW ACCESS TOKEN  ", accessToken);
+    res.cookie("access-token", accessToken, {
+      maxAge: 600000,
+    });
+
+    jwt.verify(
+      req.cookies["access-token"],
+      process.env.ACCSS_TOKEN_SECRET,
+      (err, user) => {
+        if (err) {
+          console.log("error in generating new accesstoken and then verifying");
+          return res.json({ error: err });
+        }
+        next();
+      }
+    );
   });
 
-  // console.log(token);
   // return res.json({ token: token });
 };
 

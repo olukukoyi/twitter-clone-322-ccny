@@ -16,13 +16,13 @@ model User {
   name         String?
   password     String
   refreshToken String?
-  // Post     Post[]
+  Post         Post[]
 }
 
 model Post {
   id     String @id @default(uuid())
   body   String
   title  String
-  // User   User   @relation(fields: [userId], references: [id])
+  User   User   @relation(fields: [userId], references: [id])
   userId String
 }
