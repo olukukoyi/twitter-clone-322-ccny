@@ -6,4 +6,8 @@ followers (follow user)
 
 double check error handling
 
+
 tatter backend functionality to project goal (trendy user, etc)
+
+
+ERROR WHEN GENERATING NEW TOKEN USING REFRESH TOKEN
