@@ -1,8 +1,8 @@
 import React from "react";
-import "./Login.css";
+import "./Signup.css";
 
 
-const Login = () => {
+const Signup = () => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [login, setLogin] = useState(false);
@@ -13,4 +13,4 @@ const Login = () => {
     };
 };
 
-export default Login;
+export default Signup;
