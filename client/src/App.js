@@ -7,6 +7,22 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
+    <div classname = "app">
+      <Routes>
+        <Route path = "/" element = {<Homepage/>}></Route>
+        <Route path = "/login" element = {<Login/>}></Route>
+        <Route path = "/signup" element = {<Signup/>}></Route>
+        <Route path = "/profile" element = {<Profile/>}></Route>
+        <Route path = "/settings" element = {<Settings/>}></Route>
+
+      </Routes>
+
+
+    
+    
+
+
+
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
@@ -29,6 +45,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+    </div>
   )
 }
 
