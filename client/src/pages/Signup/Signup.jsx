@@ -12,10 +12,10 @@ const Signup = () => {
   
     return (
       <div className="signup">
-        <div className="logo">
+        <div className="signup-logo">
           
         </div>
-        <div className="form">
+        <div className="signup-form">
             <h1>Happening Now</h1>
             <h2 className="form-subtitle">Join today.</h2>
 
@@ -61,7 +61,6 @@ const Signup = () => {
             
             <button type="submit" className="signup-button">Sign Up</button>
           </form>
-          </div>
         </div>
       </div>
     );
