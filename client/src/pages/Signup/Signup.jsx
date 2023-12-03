@@ -78,6 +78,9 @@ const Signup = () => {
                     <p>Already have an account? Log In </p>
                 </form>
             </div>
+            <div className="footer">
+                <p>&copy; Team V</p>
+            </div>
         </div>
     );
   };

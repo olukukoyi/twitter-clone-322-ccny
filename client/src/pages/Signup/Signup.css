@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 .signup {
     display: flex;
     height: 100vh;
@@ -12,9 +16,29 @@
     align-items: center;
 }
 
+
 .signup-left-logo {
     width: 350px; 
     height: auto;
+    transition: width 0.5s ease; 
+}
+
+@media (max-width: 600px) {
+    .signup {
+        flex-direction: row; 
+    }
+
+    .signup-left {
+        flex: 0; 
+    }
+
+    .signup-left-logo {
+        width: 100px;
+    }
+
+    .signup-right {
+        flex: 1;
+    }
 }
 
 .signup-right {
@@ -71,4 +95,12 @@
 
 .login-link:hover {
     text-decoration: underline;
+}
+
+.footer {
+    text-align: center;
+    padding: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

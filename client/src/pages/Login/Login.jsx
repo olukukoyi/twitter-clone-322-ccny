@@ -42,9 +42,12 @@ const Login = () => {
                         />
                     </div>
                     <button type="submit" className="login-button">Login</button>
+                
+                    <p>Don't have an account? Sign Up </p>
                 </form>
-
-                <p>Don't have an account? Sign Up </p>
+            </div>
+            <div className="footer">
+                <p>&copy; Team V</p>
             </div>
         </div>
     );
