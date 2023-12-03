@@ -70,7 +70,7 @@ body {
 }
 
 .login-button {
-    width: 300px; /* Adjust the width and padding as needed */
+    width: 320px; /* Adjust the width and padding as needed */
     padding: 12px;
     background-color: #1da1f2; /* Twitter-like primary color */
     color: white;

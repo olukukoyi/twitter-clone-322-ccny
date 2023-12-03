@@ -79,7 +79,7 @@ const Signup = () => {
                 </form>
             </div>
             <div className="footer">
-                <p>&copy; Team V</p>
+                <p>&copy; 2023 Team V</p>
             </div>
         </div>
     );

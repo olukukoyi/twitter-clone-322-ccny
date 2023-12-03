@@ -4,24 +4,18 @@ import Signup from './pages/Signup/Signup';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <Signup />
-    </div>
+    return (
+        <BrowserRouter>
+        <div className="App">
+            <Routes>
+                <Route path="/" element={<Login />}></Route>
+                <Route path="/signup" element={<Signup />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+            </Routes>
+        </div>
+        </BrowserRouter>
     
-    
-    /*
-    <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
-    */
-  );
+    );
 }
 
 export default App;

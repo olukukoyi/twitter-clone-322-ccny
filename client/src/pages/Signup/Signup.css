@@ -70,12 +70,12 @@ body {
 }
 
 .signup-button {
-    width: 300px; 
+    width: 320px; 
     padding: 12px;
     background-color: #1da1f2; 
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
 }
 
