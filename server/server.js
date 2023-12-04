@@ -11,7 +11,6 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // taboo words
-// 
 
 app = express();
 app.use(express.json());
@@ -42,13 +41,13 @@ app.get("/user/:id", userRoutes.getUserDetails);
 // -------
 
 // post
-app.get("/post",  postRoutes.getAllPost); // get all post
+app.get("/post", postRoutes.getAllPost); // get all post
 app.get("/post/:id", postRoutes.getUserPost); // get user specific post by id
-app.post("/post/createPost",  postRoutes.createPost); // create post
+app.post("/post/createPost", postRoutes.createPost); // create post
 app.get("/post/single/:id", postRoutes.getPostDetails); // get post details
 // ----------
 
 // follows
-app.get("/followers/:id",  followerRoutes.getUserFollowers);
-app.post("/followers/add-follower",  followerRoutes.addFollower);
+app.get("/followers/:id", followerRoutes.getUserFollowers);
+app.post("/followers/add-follower", followerRoutes.addFollower);
 // app.post("/following/:id", middleware, followerRoutes.getUserFollowing);
