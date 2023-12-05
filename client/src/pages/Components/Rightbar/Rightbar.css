@@ -1,0 +1,7 @@
+.rightbar {
+    flex: 0.4;
+    padding: 1rem 2rem;
+    background-color: darkgrey;
+    height: 100vh;
+}
+

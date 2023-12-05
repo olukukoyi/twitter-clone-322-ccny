@@ -1,0 +1,36 @@
+
+.leftbar {
+    flex: 0.3;
+    padding: 1rem 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+}
+
+.leftbar-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 88px; /* Width slightly wider than the icons */
+    margin-top: auto; /* Push icons to the bottom */
+}
+
+.leftbar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon both horizontally and vertically */
+    padding: 0.5rem; /* Adjusted padding for a larger touch area */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 50%; /* Rounded shape for a circle */
+}
+
+.leftbar-icon:hover {
+    background-color: #1da1f2; /* Twitter-like hover color */
+}
+
+.leftbar-icon a {
+    text-decoration: none;
+    color: white; /* White color for the icons */
+}

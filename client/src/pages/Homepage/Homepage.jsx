@@ -1,10 +1,16 @@
-import React from 'react';
-import Feed from './Feed.jsx';
-import TweetInput from './TweetInput.jsx';
-import Sidebar from '../Components/Sidebar/SideBar.jsx';
-import './HomePage.css';
 
-function HomePage() {
+import React from 'react';
+import TweetInput from '../Components/Post/TweetInput.jsx';
+//import Navbar from '../Components/Navbar/Navbar.jsx';
+
+import Leftbar from '../Components/Leftbar/Leftbar.jsx';
+import Rightbar from '../Components/Rightbar/Rightbar.jsx';
+import Feed from '../Components/Feed/Feed.jsx';
+import './Homepage.css';
+
+
+
+const Homepage = () => {
     // TODO: Replace with actual data
     const tweets = ['Tweet1', 'Tweet2', 'Tweet3'];
     const trendingUsers = [
@@ -20,17 +26,28 @@ function HomePage() {
 
     return (
         <div className="homepage">
-            <div className="tweet-input">
-                <TweetInput onTweet={handleTweet} />
+            <div className="leftbar">
+                <Leftbar />
             </div>
+
             <div className="feed">
                 <Feed tweets={tweets} />
             </div>
-            <div className="sidebar">
-                <Sidebar trendingUsers={trendingUsers} />
+            
+            <div className='rightbar'>
+                <Rightbar trendingUsers={trendingUsers} />
             </div>
+
+            {/* 
+            
+            <div className="tweet-input">
+                <TweetInput onTweet={handleTweet} />
+            </div>
+            
+             */}
+            
         </div>
     );
 }
 
-export default HomePage;
+export default Homepage;
