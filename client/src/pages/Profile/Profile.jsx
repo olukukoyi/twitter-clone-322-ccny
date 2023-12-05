@@ -6,10 +6,9 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // Simulating fetching user data from a backend API
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/api/user'); // Replace with your actual backend API endpoint
+        const response = await fetch('http://localhost:8001/user/:id'); // Replace ':id' with the actual user ID
         const fetchedUserData = await response.json();
         setUserData(fetchedUserData);
       } catch (error) {
@@ -32,11 +31,6 @@ const ProfilePage = () => {
   const handleImageChange = () => {
     console.log('Change image functionality');
   };
-
-  if (!userData) {
-    // Loading state (you can customize this)
-    return <div>Loading...</div>;
-  }
 
   return (
       <div>

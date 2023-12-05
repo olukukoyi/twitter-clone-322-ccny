@@ -1,18 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Payment = () => {
-    const [balance, setBalance] = useState(1000); // Initial balance
+    const [balance, setBalance] = useState(1000);
     const [amount, setAmount] = useState(0);
     const [transactionType, setTransactionType] = useState(null);
 
-    const handleTransaction = () => {
-        if (transactionType === 'deposit') {
-            setBalance(balance + amount);
-        } else if (transactionType === 'withdraw' && balance >= amount) {
-            setBalance(balance - amount);
-        } else {
-            alert('Insufficient balance for withdrawal');
+    useEffect(() => {
+        const fetchPaymentData = async () => {
+            try {
+                // Simulating a backend response
+                const response = await fetch('/api/payment'); // replace with your actual endpoint
+                const paymentData = await response.json();
+
+                // Setting state with fetched payment data
+                setBalance(paymentData.balance);
+            } catch (error) {
+                console.error('Error fetching payment data:', error);
+            }
+        };
+
+        fetchPaymentData();
+    }, []); // Empty dependency array ensures the effect runs only once on mount
+
+    const handleTransaction = async () => {
+        try {
+            const response = await fetch('/api/payment/transaction', {
+                method: 'POST', // or 'PUT' based on your API
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    transactionType,
+                    amount,
+                }),
+            });
+
+            if (response.ok) {
+                const newBalance = await response.json();
+                setBalance(newBalance);
+                alert('Transaction successful!');
+            } else {
+                alert('Transaction failed');
+            }
+        } catch (error) {
+            console.error('Error processing transaction:', error);
+            alert('Transaction failed');
         }
+
         setAmount(0); // Reset amount after transaction
     };
 
@@ -20,8 +54,12 @@ const Payment = () => {
         <div style={styles.container}>
             <div style={styles.balanceBubble}>Current Balance: ${balance}</div>
             <div style={styles.buttonContainer}>
-                <button style={styles.button} onClick={() => setTransactionType('deposit')}>Deposit</button>
-                <button style={styles.button} onClick={() => setTransactionType('withdraw')}>Withdraw</button>
+                <button style={styles.button} onClick={() => setTransactionType('deposit')}>
+                    Deposit
+                </button>
+                <button style={styles.button} onClick={() => setTransactionType('withdraw')}>
+                    Withdraw
+                </button>
             </div>
             {transactionType && (
                 <div>
@@ -32,7 +70,9 @@ const Payment = () => {
                         onChange={(e) => setAmount(Number(e.target.value))}
                         placeholder="Enter amount"
                     />
-                    <button style={styles.button} onClick={handleTransaction}>Submit</button>
+                    <button style={styles.button} onClick={handleTransaction}>
+                        Submit
+                    </button>
                 </div>
             )}
         </div>
