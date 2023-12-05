@@ -17,11 +17,11 @@ const Payment = () => {
     };
 
     return (
-        <div>
-            <h2>Current Balance: ${balance}</h2>
-            <div>
-                <button onClick={() => setTransactionType('deposit')}>Deposit</button>
-                <button onClick={() => setTransactionType('withdraw')}>Withdraw</button>
+        <div style={styles.container}>
+            <div style={styles.balanceBubble}>Current Balance: ${balance}</div>
+            <div style={styles.buttonContainer}>
+                <button style={styles.button} onClick={() => setTransactionType('deposit')}>Deposit</button>
+                <button style={styles.button} onClick={() => setTransactionType('withdraw')}>Withdraw</button>
             </div>
             {transactionType && (
                 <div>
@@ -32,11 +32,41 @@ const Payment = () => {
                         onChange={(e) => setAmount(Number(e.target.value))}
                         placeholder="Enter amount"
                     />
-                    <button onClick={handleTransaction}>Submit</button>
+                    <button style={styles.button} onClick={handleTransaction}>Submit</button>
                 </div>
             )}
         </div>
     );
+};
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        backgroundColor: '#ADD8E6', // light blue
+        height: '100vh',
+        justifyContent: 'center',
+    },
+    balanceBubble: {
+        padding: '20px',
+        fontSize: '32px',
+        borderRadius: '50%',
+        backgroundColor: '#90EE90', // light green
+    },
+    buttonContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '200px',
+        marginTop: '20px',
+    },
+    button: {
+        backgroundColor: '#FFFFFF', // white
+        border: 'none',
+        borderRadius: '12px',
+        padding: '10px 20px',
+        cursor: 'pointer',
+    },
 };
 
 export default Payment;
