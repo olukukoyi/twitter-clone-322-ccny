@@ -1,7 +1,7 @@
 import React from 'react';
 import Feed from './Feed.jsx';
 import TweetInput from './TweetInput.jsx';
-import Sidebar from './Sidebar.jsx';
+import Sidebar from '../Components/Sidebar/SideBar.jsx';
 import './HomePage.css';
 
 function HomePage() {
