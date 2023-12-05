@@ -9,12 +9,12 @@ const Signup = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  // const [selectedUserType, setSelectedUserType] = useState("");
+  const [inputUserType, setinputUserType] = useState("ordinary");
 
   const addNewUser = async (e) => {
     e.preventDefault();
 
-    const form = { firstName, lastName, name: username, password, email };
+    const form = { firstName, lastName, name: username, email, password, inputUserType };
 
     const res = await fetch("http://localhost:8001/auth/signup", {
       method: "POST",
@@ -91,6 +91,26 @@ const Signup = () => {
                 setPassword(e.target.value);
               }}
             />
+          </div>
+          <div className="user-select">
+            <label>
+              <input
+                type="radio"
+                value="ordinary"
+                checked={inputUserType === "ordinary"}
+                onChange={() => setInputUserType("ordinary")}
+              />
+              Ordinary User
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="corporate"
+                checked={inputUserType === "corporate"}
+                onChange={() => setInputUserType("corporate")}
+              />
+              Corporate User
+            </label>
           </div>
           <button
             onClick={(e) => {
