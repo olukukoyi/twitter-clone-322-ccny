@@ -11,21 +11,22 @@ import './Leftbar.css';
 const Leftbar = () => {
     return (
         <div className="leftbar">
-            
-            <div className="leftbar-icon">
-                <Link to="/homepage">
-                    <CottageIcon fontSize="large" />
-                </Link>
-            </div>
-            <div className="leftbar-icon">
-                <Link to="/search">
-                    <SearchIcon fontSize="large" />
-                </Link>
-            </div>
-            <div className="leftbar-icon">
-                <Link to="/profile">
-                    <PersonIcon fontSize="large" />
-                </Link>
+            <div className='leftbar-links'>
+                <div className="leftbar-icon">
+                    <Link to="/homepage">
+                        <CottageIcon fontSize="large" />
+                    </Link>
+                </div>
+                <div className="leftbar-icon">
+                    <Link to="/search">
+                        <SearchIcon fontSize="large" />
+                    </Link>
+                </div>
+                <div className="leftbar-icon">
+                    <Link to="/profile">
+                        <PersonIcon fontSize="large" />
+                    </Link>
+                </div>
             </div>
         </div>
     );

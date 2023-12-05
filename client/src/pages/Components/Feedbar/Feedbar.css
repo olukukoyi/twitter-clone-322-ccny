@@ -1,7 +1,9 @@
 .feed {
-    flex: 0.3;
+    flex: 0.4;
+    border-right: 1px solid #1f2d3d; /* Equivalent to border-t-slate-800 */
+    border-left: 1px solid #1f2d3d; /* Equivalent to border-x-2 */
 }
 
 .feed-header {
-
+    margin-left: 1rem;
 }

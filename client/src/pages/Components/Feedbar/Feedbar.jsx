@@ -4,7 +4,7 @@ import Tweet from '../CreatePost/Post.jsx';
 import './Feedbar.css';
 
 
-const Feed = () => {
+const Feedbar = () => {
     return (
         <div className="feed">
             <header className='feed-header'>
@@ -31,4 +31,4 @@ const Feed = () => {
 //     tweets: PropTypes.arrayOf(PropTypes.string).isRequired,
 // };
 
-export default Feed;
+export default Feedbar;

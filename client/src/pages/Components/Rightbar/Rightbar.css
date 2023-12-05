@@ -1,7 +1,29 @@
 .rightbar {
-    flex: 0.4;
+    flex: 0.3;
     padding: 1rem 2rem;
-    background-color: darkgrey;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
+
+.trending-posts {
+    padding-left: 1rem; 
+    padding-right: 1rem; 
+    background-color: slategray; 
+    border-radius: 1rem; 
+    display: flex;
+    flex-direction: column;
+
+}
+
+.trending-users {
+    padding-left: 1rem; 
+    padding-right: 1rem;
+    background-color: slategray; 
+    border-radius: 1rem; /* Equivalent to rounded-lg */
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}

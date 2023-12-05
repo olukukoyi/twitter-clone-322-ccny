@@ -13,13 +13,10 @@ import './Rightbar.css';
 const Rightbar = ({ trendingUsers }) => {
     return (
     <div className="rightbar">
-        <div className='searchbar'>
-            search
+        <div className='trending-posts'>
+            <h2>Trending Posts</h2>
         </div>
-        <div>
-            trendy posts
-        </div>
-        <div className='trendy-users'>
+        <div className='trending-users'>
             <h2>Trending Users</h2>
             {trendingUsers.slice(0, 3).map((user, index) => (
                 <div key={index} className="user-flair">
