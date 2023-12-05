@@ -67,7 +67,10 @@ const Login = () => {
             Login
           </button>
 
-          <p>Don't have an account? Sign Up </p>
+          <p>
+            Don't have an account?{" "}
+            <Link to="/signup">Sign up</Link>
+          </p>
         </form>
       </div>
       <div className="footer">

@@ -16,26 +16,26 @@ body {
     align-items: center;
 }
 
-.signup-left-logo {
+.login-left-logo {
     width: 350px; 
     height: auto;
     transition: width 0.5s ease; 
 }
 
 @media (max-width: 600px) {
-    .signup {
+    .login {
         flex-direction: row; 
     }
 
-    .signup-left {
+    .login-left {
         flex: 0; 
     }
 
-    .signup-left-logo {
+    .login-left-logo {
         width: 100px;
     }
 
-    .signup-right {
+    .login-right {
         flex: 1;
     }
 }

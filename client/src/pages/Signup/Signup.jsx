@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Signup.css";
 import Vlogo from "../../images/vlogo.png";
 
@@ -102,7 +102,10 @@ const Signup = () => {
             Sign Up
           </button>
 
-          <p>Already have an account? Log In </p>
+          <p>
+            Already have an account?{" "}
+            <Link to="/login">Log In</Link>
+          </p>
         </form>
       </div>
       <div className="footer">

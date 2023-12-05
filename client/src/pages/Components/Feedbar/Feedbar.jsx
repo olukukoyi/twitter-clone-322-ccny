@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tweet from '../Post/Tweet.jsx';
-import './Feed.css';
+import Tweet from '../CreatePost/Post.jsx';
+import './Feedbar.css';
 
 
 const Feed = () => {
     return (
         <div className="feed">
-            Feed
+            <header className='feed-header'>
+                <h2>Home</h2>
+            </header>
         </div>
     );
 };
