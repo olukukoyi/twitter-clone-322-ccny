@@ -12,18 +12,14 @@ import './Homepage.css';
 
 
 const Homepage = () => {
-    // TODO: Replace with actual data
+    //const [loggedIn, setLoggedIn] =useState(false);
+    //const [userData, setUserData] =useState(null);
     const tweets = ['Tweet1', 'Tweet2', 'Tweet3'];
     const trendingUsers = [
         { username: 'User1' },
         { username: 'User2' },
         { username: 'User3' },
     ];
-
-    const handleTweet = (tweet) => {
-        console.log('New tweet:', tweet);
-        // TODO: logic to handle new tweet
-    };
 
     return (
         <div className="homepage">
