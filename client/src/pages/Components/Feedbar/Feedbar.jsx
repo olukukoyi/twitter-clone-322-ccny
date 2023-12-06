@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ImageIcon from '@mui/icons-material/Image';
 import PropTypes from 'prop-types';
 import Tweet from '../CreatePost/Post.jsx';
 import './Feedbar.css';
@@ -27,7 +26,7 @@ const Feedbar = (title) => {
         });
 
         setNewPostContent('');
-        setimage(null);
+        setImage(null);
     };
 
     const handleImageChange = (e) => {

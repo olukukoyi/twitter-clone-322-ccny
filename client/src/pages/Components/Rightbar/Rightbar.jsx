@@ -1,12 +1,6 @@
 
 import React from 'react';
 import { Link } from "react-router-dom";
-import {
-    Home as CottageIcon,
-    Person as PersonIcon,
-    Search as SearchIcon,
-
-} from '@mui/icons-material';
 import './Rightbar.css';
 
 
