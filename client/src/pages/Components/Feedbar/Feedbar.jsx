@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ImageIcon from '@mui/icons-material/Image';
 import PropTypes from 'prop-types';
 import Tweet from '../CreatePost/Post.jsx';
 import './Feedbar.css';
@@ -31,7 +32,7 @@ const Feedbar = (title) => {
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
-      };
+    };
 
     return (
         <div className="feed">
@@ -45,8 +46,13 @@ const Feedbar = (title) => {
                         value={newPostContent}
                         onChange={(e) => setNewPostContent(e.target.value)}
                     />
-                    <input type="file" accept="image/*" onChange={handleImageChange} />
-                    <button type="submit">Post</button>
+                    <div className='new-post-icons'>
+                        <label className="image-upload">
+                            <input type="file" accept="image/*" onChange={handleImageChange} />
+                            <ImageIcon fontSize="medium" />
+                        </label>
+                        <button type="submit">Post</button>
+                    </div>
                 </form>
             </div>
         </div>
