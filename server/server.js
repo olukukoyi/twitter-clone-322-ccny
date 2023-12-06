@@ -4,6 +4,7 @@ const userRoutes = require("../server/user/route");
 const authRoutes = require("./auth/route");
 const postRoutes = require("../server/post/route");
 const followerRoutes = require("../server/follows/route");
+const adsRoutes = require("../server/ads/route");
 const middleware = require("./middleware/route");
 
 const cookieParser = require("cookie-parser");
@@ -38,6 +39,7 @@ app.get("/auth/logout", authRoutes.userLogOut); // route to generate new jwt tok
 
 //user
 app.get("/user/:id", userRoutes.getUserDetails);
+app.put("/user/change-user-type", userRoutes.changeUserType);
 // -------
 
 // post
@@ -50,4 +52,11 @@ app.get("/post/single/:id", postRoutes.getPostDetails); // get post details
 // follows
 app.get("/followers/:id", followerRoutes.getUserFollowers);
 app.post("/followers/add-follower", followerRoutes.addFollower);
-// app.post("/following/:id", middleware, followerRoutes.getUserFollowing);
+// ----------
+
+// ads
+app.get("/ads", adsRoutes.getAllAds);
+app.post("/ads/create", adsRoutes.createAd);
+app.get("/ads/user/:id", adsRoutes.getUserAds);
+app.get("/ads/:id", adsRoutes.getAdsDetails);
+// ----------
