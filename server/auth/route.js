@@ -50,27 +50,21 @@ const userLogIn = async (req, res) => {
       const token = jwt.sign({ id, name }, process.env.ACCSS_TOKEN_SECRET, {
         expiresIn: "10m",
       });
-      const refreshToken = jwt.sign(
-        { id, name },
-        process.env.REFRESH_TOKEN_SECRET
-      );
 
       // store tokens in cookies
       res.cookie("access-token", token, {
         maxAge: 600000,
       });
-      res.cookie("refresh-token", refreshToken);
 
       return res.json({
         user: existingUser,
         token: token,
-        refreshToken: refreshToken,
       });
     }
 
     res.json({ user: newUser });
   } catch (err) {
-    console.log("error");
+    console.log(err);
     return res.json({ error: err });
   }
 };
@@ -79,9 +73,7 @@ const userLogOut = async (req, res) => {
   res.cookie("access-token", "", {
     maxAge: 1,
   });
-  res.cookie("refresh-token", "", {
-    maxAge: 1,
-  });
+
   res.redirect("/");
 };
 

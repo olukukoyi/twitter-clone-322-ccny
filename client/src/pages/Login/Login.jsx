@@ -1,33 +1,29 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
-import Cookies from "js-cookie";
+import { login } from "../../../utils/authFunctions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8001/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // You might need additional headers (e.g., authentication tokens) based on the API requirements
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    const data = await res.json();
+    try {
+      login(email, password);
 
-    console.log(data);
-    Cookies.set("token", data.token);
-    Cookies.set("userid", data.user.id);
-    // console.log("cookies: ", Cookies.get("token"));
+      setSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (success) {
+      navigate("/bobo");
+    }
   };
 
   return (
