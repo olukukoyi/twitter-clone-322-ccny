@@ -26,6 +26,9 @@ const getUserDetails = async (req, res) => {
 
   res.json({ user: userObject });
 };
+
+// set up user type
+
 const userRoutes = { getUserDetails };
 
 module.exports = userRoutes;

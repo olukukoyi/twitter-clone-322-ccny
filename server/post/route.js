@@ -28,6 +28,18 @@ const createPost = async (req, res) => {
   return res.json({ newPost: newPost });
 };
 
-const postRoutes = { getAllPost, getUserPost, createPost };
+const getPostDetails = async (req, res) => {
+  const id = req.body.id;
+
+  const postDetails = await prisma.post.findUnique({
+    where: {
+      id: id,
+    },
+  });
+
+  res.json({ postDetails: postDetails });
+};
+
+const postRoutes = { getAllPost, getUserPost, createPost, getPostDetails };
 
 module.exports = postRoutes;
