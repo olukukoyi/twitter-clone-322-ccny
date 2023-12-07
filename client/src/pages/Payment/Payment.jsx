@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 const Payment = () => {
-    const [balance, setBalance] = useState(1000);
+    const [balance, setBalance] = useState(0); // Initialize with 0, will be updated with actual balance from the backend
     const [amount, setAmount] = useState(0);
     const [transactionType, setTransactionType] = useState(null);
 
     useEffect(() => {
         const fetchPaymentData = async () => {
             try {
-                // Simulating a backend response
-                const response = await fetch('/api/payment'); // replace with your actual endpoint
+                // Fetch payment data from the backend
+                const response = await fetch('http://localhost:8001/api/payment'); // Update with the actual endpoint
                 const paymentData = await response.json();
 
                 // Setting state with fetched payment data
@@ -24,8 +24,13 @@ const Payment = () => {
 
     const handleTransaction = async () => {
         try {
-            const response = await fetch('/api/payment/transaction', {
-                method: 'POST', // or 'PUT' based on your API
+            if (transactionType === 'withdraw' && amount > balance) {
+                alert('Insufficient funds. Cannot withdraw more than the current balance.');
+                return;
+            }
+
+            const response = await fetch('http://localhost:8001/api/payment/transaction', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -65,11 +70,13 @@ const Payment = () => {
                 <div>
                     <h3>{transactionType.charAt(0).toUpperCase() + transactionType.slice(1)}</h3>
                     <input
-                        type="number"
+                        type="range"
+                        min="0"
+                        max={balance}
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value))}
-                        placeholder="Enter amount"
                     />
+                    <div style={styles.amountLabel}>Amount: ${amount}</div>
                     <button style={styles.button} onClick={handleTransaction}>
                         Submit
                     </button>
@@ -84,7 +91,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#ADD8E6', // light blue
+        backgroundColor: '#ffffff',
         height: '100vh',
         justifyContent: 'center',
     },
@@ -101,11 +108,16 @@ const styles = {
         marginTop: '20px',
     },
     button: {
-        backgroundColor: '#FFFFFF', // white
+        backgroundColor: '#ADD8E6', // white
         border: 'none',
         borderRadius: '12px',
         padding: '10px 20px',
         cursor: 'pointer',
+    },
+    amountLabel: {
+        marginTop: '10px',
+        marginBottom: '20px',
+        fontSize: '16px',
     },
 };
 
