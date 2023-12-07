@@ -77,8 +77,57 @@ const Settings = () => {
         }
     };
 
+    const styles = {
+        container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            backgroundColor: '#FFFFFF',
+            height: '100vh',
+            justifyContent: 'center',
+        },
+    };
+
     return (
         <div style={styles.container}>
+            <style>
+                {`
+          h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+          }
+
+          label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+          }
+
+          input,
+          select {
+            width: 300px;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+
+          button {
+            width: 320px;
+            padding: 12px;
+            background-color: #1da1f2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+          }
+
+          button:hover {
+            background-color: #0d8ecf;
+          }
+        `}
+            </style>
             <h2>Settings</h2>
             <label>
                 Update Username:
@@ -107,17 +156,6 @@ const Settings = () => {
             <button onClick={handleDeleteAccount}>Delete Account</button>
         </div>
     );
-};
-
-const styles = {
-    container: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        backgroundColor: '#ADD8E6', // light blue
-        height: '100vh',
-        justifyContent: 'center',
-    },
 };
 
 export default Settings;
