@@ -52,7 +52,7 @@ const Leftbar = () => {
                 </div>
                 <div className="leftbar-icon">
                     <Link to="/settings">
-                        <SettingIcon fontSize="large" />
+                        <SettingsIcon fontSize="large" />
                     </Link>
                 </div>
                 <div className="leftbar-icon" onClick={handleLogout}>
