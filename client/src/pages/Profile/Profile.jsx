@@ -1,142 +1,127 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const ProfilePage = () => {
-  const [showImagePopup, setShowImagePopup] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [userData, setUserData] = useState(null);
+  const [activeSection, setActiveSection] = useState('tweets');
+  const [userData, setUserData] = useState({
+    username: 'JohnDoe',
+    bio: 'Web Developer',
+    profilePicture: 'https://placekitten.com/200/200', // Placeholder image URL
+    tweets: ['Tweet 1', 'Tweet 2', 'Tweet 3'], // Simulated tweet data
+    replies: ['Reply 1', 'Reply 2'], // Simulated reply data
+    media: ['Media 1', 'Media 2'], // Simulated media data
+    ads: ['Ad 1', 'Ad 2'], // Simulated ad data
+    following: 100,
+    followers: 150,
+  });
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('http://localhost:8001/user/:id'); // Replace ':id' with the actual user ID
-        const fetchedUserData = await response.json();
-        setUserData(fetchedUserData);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchUserData();
-  }, []);
-
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
-    setShowImagePopup(true);
+  const handleSectionClick = (section) => {
+    setActiveSection(section);
   };
 
-  const handlePopupClose = () => {
-    setShowImagePopup(false);
-  };
-
-  const handleImageChange = () => {
-    console.log('Change image functionality');
+  const renderContent = () => {
+    switch (activeSection) {
+      case 'tweets':
+        return userData.tweets.map((tweet, index) => (
+            <div key={index} style={styles.contentItem}>
+              {tweet}
+            </div>
+        ));
+      case 'replies':
+        return userData.replies.map((reply, index) => (
+            <div key={index} style={styles.contentItem}>
+              {reply}
+            </div>
+        ));
+      case 'media':
+        return userData.media.map((media, index) => (
+            <div key={index} style={styles.contentItem}>
+              {media}
+            </div>
+        ));
+      case 'ads':
+        return userData.ads.map((ad, index) => (
+            <div key={index} style={styles.contentItem}>
+              {ad}
+            </div>
+        ));
+      case 'following':
+        return <div style={styles.contentItem}>Following: {userData.following}</div>;
+      case 'followers':
+        return <div style={styles.contentItem}>Followers: {userData.followers}</div>;
+      default:
+        return null;
+    }
   };
 
   return (
-      <div>
-        <div style={styles.backgroundImageContainer} onClick={() => handleImageClick(userData.backgroundImage)}>
-          <div style={styles.profileInfoContainer}>
-            <img
-                src={userData.profilePicture}
-                alt="Profile"
-                style={styles.profilePicture}
-                onClick={() => handleImageClick(userData.profilePicture)}
-            />
-            <div style={styles.profileDetails}>
-              <h2>{userData.username}</h2>
-              <p>{userData.bio}</p>
-              <div style={styles.stats}>
-                <div>{userData.tweetCount} Tweets</div>
-                <div>{userData.followers} Followers</div>
-                <div>{userData.following} Following</div>
-                <div>{userData.ads} Ads</div>
-              </div>
-            </div>
+      <div style={styles.container}>
+        <div style={styles.profileInfo}>
+          <img src={userData.profilePicture} alt="Profile" style={styles.profilePicture} />
+          <div style={styles.profileDetails}>
+            <h2>{userData.username}</h2>
+            <p>{userData.bio}</p>
           </div>
         </div>
-
-        {userData.tweets.map((tweet) => (
-            <div key={tweet.id} style={styles.tweetContainer}>
-              <p>{tweet.content}</p>
-            </div>
-        ))}
-
-        {showImagePopup && (
-            <div style={styles.imagePopup}>
-          <span style={styles.closeButton} onClick={handlePopupClose}>
-            &times;
-          </span>
-              <img src={selectedImage} alt="Popup" style={styles.popupImage} />
-              <div style={styles.changeImageButton} onClick={handleImageChange}>
-                Change Image
+        <div style={styles.navBar}>
+          {['tweets', 'replies', 'media', 'ads', 'following', 'followers'].map((section) => (
+              <div
+                  key={section}
+                  style={activeSection === section ? styles.activeNavItem : styles.navItem}
+                  onClick={() => handleSectionClick(section)}
+              >
+                {section}
               </div>
-            </div>
-        )}
+          ))}
+        </div>
+        <div style={styles.content}>{renderContent()}</div>
       </div>
   );
 };
 
 const styles = {
-  backgroundImageContainer: {
-    height: '50vh',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  profileInfoContainer: {
+  container: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    textAlign: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
     padding: '20px',
-    borderRadius: '10px',
+  },
+  profileInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: '20px',
   },
   profilePicture: {
-    width: '100px',
-    height: '100px',
+    width: '150px',
+    height: '150px',
     borderRadius: '50%',
-    cursor: 'pointer',
+    marginRight: '20px',
   },
   profileDetails: {
-    marginTop: '10px',
+    textAlign: 'left',
   },
-  stats: {
+  navBar: {
     display: 'flex',
-    justifyContent: 'space-around',
-    marginTop: '10px',
+    marginBottom: '20px',
   },
-  tweetContainer: {
+  navItem: {
+    padding: '10px',
+    cursor: 'pointer',
+    marginRight: '10px',
+  },
+  activeNavItem: {
+    padding: '10px',
+    cursor: 'pointer',
+    marginRight: '10px',
+    borderBottom: '2px solid #1B95E0', // Active section color
+  },
+  content: {
+    width: '100%',
+  },
+  contentItem: {
     border: '1px solid #ddd',
     borderRadius: '8px',
     margin: '10px',
     padding: '10px',
-  },
-  imagePopup: {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    padding: '20px',
-    borderRadius: '10px',
-    zIndex: 1000,
-    cursor: 'pointer',
-  },
-  popupImage: {
-    maxWidth: '100%',
-    maxHeight: '80vh',
-    borderRadius: '8px',
-  },
-  changeImageButton: {
-    position: 'absolute',
-    bottom: '10px',
-    left: '10px',
-    cursor: 'pointer',
-    color: '#1B95E0',
   },
 };
 
