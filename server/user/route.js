@@ -40,6 +40,7 @@ const changeUserType = async (req, res) => {
       post: {
         include: { likes: true },
       },
+      followers: true,
     },
   });
 
@@ -67,17 +68,19 @@ const changeUserType = async (req, res) => {
   }
   if (type === "trendy" && user.userType != "trendy") {
     if (user.post.length < 1) {
+      console.log(user);
       res.json({ error: "insuffiencent amount of posts, denied" });
     }
-    let count = 0;
+    let trendyPost = 0;
     const userPosts = user.post;
-    console.log(userPosts);
+    const userFollowers = user.followers;
+
     for (const post of userPosts) {
       if (post.likes.length >= 10) {
-        count += 1;
-        console.log(count);
+        trendyPost += 1;
+        console.log(trendyPost);
       }
-      if (count === 2) {
+      if (trendyPost === 2 && userFollowers.length >= 10) {
         const updatedUser = await prisma.user.update({
           where: {
             id: userId,
@@ -90,8 +93,10 @@ const changeUserType = async (req, res) => {
       }
     }
 
-    res.json({ error: "insuffiencent amount of likes, denied" });
+    res.json({ error: "insuffiencent amount of likes or followers, denied" });
   }
+
+  // res.json({ message: "already that type of user" }); // implement better errors
 };
 
 // set up user type

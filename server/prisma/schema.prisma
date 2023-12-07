@@ -8,17 +8,17 @@ datasource db {
 }
 
 model User {
-  id       String     @id @unique @default(uuid())
-  email    String     @unique
-  name     String?
-  password String
-  userType String     @default("ordinary")
-  ads      Ads[]
-  comments Comments[]
-  likes    Likes[]
-  post     Post[]
-  User_A   User[]     @relation("Followers")
-  User_B   User[]     @relation("Followers")
+  id        String     @id @unique @default(uuid())
+  email     String     @unique
+  name      String?
+  password  String
+  userType  String     @default("ordinary")
+  ads       Ads[]
+  comments  Comments[]
+  likes     Likes[]
+  post      Post[]
+  followers User[]     @relation("Followers")
+  following User[]     @relation("Followers")
 }
 
 model Post {
@@ -29,12 +29,14 @@ model Post {
   comments Comments[]
   likes    Likes[]
   User     User       @relation(fields: [userId], references: [id])
+  User     User       @relation(fields: [userId], references: [id])
 }
 
 model Ads {
   id     String  @id @default(uuid())
   title  String
   body   String
+  userId String?
   userId String?
   User   User?   @relation(fields: [userId], references: [id])
 }
@@ -45,6 +47,8 @@ model Comments {
   createdAt DateTime @default(now())
   postId    String?
   userId    String?
+  postId    String?
+  userId    String?
   Post      Post?    @relation(fields: [postId], references: [id])
   User      User?    @relation(fields: [userId], references: [id])
 }
@@ -52,6 +56,8 @@ model Comments {
 model Likes {
   userId String
   postId String
+  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
   post   Post   @relation(fields: [postId], references: [id])
   user   User   @relation(fields: [userId], references: [id])
 

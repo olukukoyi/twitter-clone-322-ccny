@@ -40,6 +40,16 @@ const getPostDetails = async (req, res) => {
   res.json({ postDetails: postDetails });
 };
 
-const postRoutes = { getAllPost, getUserPost, createPost, getPostDetails };
+const getSurferFeed = async (req, res) => {
+  // get feed from 3 top 3 trendy users
+};
+
+const postRoutes = {
+  getAllPost,
+  getUserPost,
+  createPost,
+  getPostDetails,
+  getSurferFeed,
+};
 
 module.exports = postRoutes;

@@ -47,6 +47,7 @@ app.get("/post", postRoutes.getAllPost); // get all post
 app.get("/post/:id", postRoutes.getUserPost); // get user specific post by id
 app.post("/post/createPost", postRoutes.createPost); // create post
 app.get("/post/single/:id", postRoutes.getPostDetails); // get post details
+app.get("/post/surfer-feed", postRoutes.getSurferFeed); // get for for surfers ( non auth users )
 // ----------
 
 // follows
