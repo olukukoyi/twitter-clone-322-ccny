@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
 import Cookies from "js-cookie";
@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +16,6 @@ const Login = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // You might need additional headers (e.g., authentication tokens) based on the API requirements
       },
       credentials: "include",
       body: JSON.stringify({
@@ -22,12 +23,17 @@ const Login = () => {
         password,
       }),
     });
+    
     const data = await res.json();
 
-    console.log(data);
-    Cookies.set("token", data.token);
-    Cookies.set("userid", data.user.id);
-    // console.log("cookies: ", Cookies.get("token"));
+    if (res.status === 200) {
+      navigate('/homepage'); 
+      console.log(data);
+      Cookies.set("token", data.token);
+      Cookies.set("userid", data.user.id);
+    } else {
+      console.error('Login failed:', data.message);
+    }
   };
 
   return (
