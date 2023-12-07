@@ -1,30 +1,26 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
-import Cookies from "js-cookie";
+import { login } from "../../../utils/authFunctions";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [success, setSuccess] = useState(false);
+
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:8001/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    
-    const data = await res.json();
+    try {
+      login(email, password);
+
+      setSuccess(true);
+    } catch (error) {
+      console.log(error);
+    }
 
     if (res.status === 200) {
       navigate('/homepage'); 
@@ -75,8 +71,7 @@ const Login = () => {
           </button>
 
           <p>
-            Don't have an account?{" "}
-            <Link to="/signup">Sign up</Link>
+            Don't have an account? <Link to="/signup">Sign up</Link>
           </p>
         </form>
       </div>
