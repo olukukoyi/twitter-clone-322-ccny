@@ -6,6 +6,7 @@ const Settings = () => {
     const [email, setEmail] = useState('');
     const [accountType, setAccountType] = useState('normal');
     const [bankAccount, setBankAccount] = useState('');
+    const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
 
     // Simulating fetching user data from a backend
     useEffect(() => {
@@ -17,11 +18,10 @@ const Settings = () => {
 
                 // Setting state with fetched user data
                 setUsername(userData.username);
-                setEmail(userData.email);
                 // Password is usually not fetched from the server for security reasons
                 // If you need to display some information about the password, consider not fetching it from the server
                 // and let the user update it separately if needed.
-
+                setEmail(userData.email);
                 setAccountType(userData.accountType);
                 setBankAccount(userData.bankAccount);
             } catch (error) {
@@ -74,6 +74,25 @@ const Settings = () => {
         } catch (error) {
             console.error('Error deleting user account:', error);
             alert('Failed to delete account');
+        }
+    };
+
+    const handleProfilePictureChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedProfilePicture(file);
+    };
+
+    const handleUploadProfilePicture = async () => {
+        try {
+            if (selectedProfilePicture) {
+                // TODO: Add logic to upload the profile picture to the server
+                alert('Profile picture uploaded!');
+            } else {
+                alert('Please select a profile picture');
+            }
+        } catch (error) {
+            console.error('Error uploading profile picture:', error);
+            alert('Failed to upload profile picture');
         }
     };
 
@@ -131,7 +150,7 @@ const Settings = () => {
             <h2>Settings</h2>
             <label>
                 Update Username:
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" defaultValue={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
             <label>
                 Password: {/* Consider not displaying the password for security reasons */}
@@ -139,7 +158,7 @@ const Settings = () => {
             </label>
             <label>
                 Email:
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
             <label>
                 Account Type:
@@ -150,10 +169,15 @@ const Settings = () => {
             </label>
             <label>
                 Bank Account:
-                <input type="text" value={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
+                <input type="text" defaultValue={bankAccount} onChange={(e) => setBankAccount(e.target.value)} />
+            </label>
+            <label>
+                Change Profile Picture:
+                <input type="file" accept="image/*" onChange={handleProfilePictureChange} />
             </label>
             <button onClick={handleSave}>Save</button>
             <button onClick={handleDeleteAccount}>Delete Account</button>
+            <button onClick={handleUploadProfilePicture}>Upload Profile Picture</button>
         </div>
     );
 };
