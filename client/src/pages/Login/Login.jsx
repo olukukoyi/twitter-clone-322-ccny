@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
 import { login } from "../../../utils/authFunctions";
@@ -23,13 +22,17 @@ const Login = () => {
     }
 
     if (res.status === 200) {
-      navigate('/homepage'); 
+      navigate("/homepage");
       console.log(data);
       Cookies.set("token", data.token);
       Cookies.set("userid", data.user.id);
-      console.log("Cookies after login:", Cookies.get('token'), Cookies.get('userid'));
+      console.log(
+        "Cookies after login:",
+        Cookies.get("token"),
+        Cookies.get("userid")
+      );
     } else {
-      console.error('Login failed:', data.message);
+      console.error("Login failed:", data.message);
     }
   };
 
