@@ -2,7 +2,7 @@ const prisma = require("../prismadb");
 
 const getAllPost = async (req, res) => {
   const posts = await prisma.post.findMany();
-  res.json({ message: "post route", posts: posts });
+  res.json({ posts: posts });
 };
 
 const getUserPost = async (req, res) => {

@@ -11,7 +11,7 @@ const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
-// taboo words  
+// taboo words
 
 app = express();
 app.use(express.json());
@@ -43,11 +43,11 @@ app.put("/user/change-user-type", userRoutes.changeUserType);
 // -------
 
 // post
-app.get("/post", postRoutes.getAllPost); // get all post
-app.get("/post/:id", postRoutes.getUserPost); // get user specific post by id
-app.post("/post/createPost", postRoutes.createPost); // create post
-app.get("/post/single/:id", postRoutes.getPostDetails); // get post details
-app.get("/post/surfer-feed", postRoutes.getSurferFeed); // get for for surfers ( non auth users )
+app.get("/posts", postRoutes.getAllPost); // get all post
+app.get("/posts/:id", postRoutes.getUserPost); // get user specific post by id
+app.post("/posts/createPost", postRoutes.createPost); // create post
+app.get("/posts/single/:id", postRoutes.getPostDetails); // get post details
+app.get("/posts/surfer-feed", postRoutes.getSurferFeed); // get for for surfers ( non auth users )
 // ----------
 
 // follows

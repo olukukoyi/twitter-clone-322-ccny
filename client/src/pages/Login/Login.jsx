@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
-import { login } from "../../../utils/authFunctions";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(false);
-
-  const navigate = useNavigate();
-  const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      login(email, password);
+    const res = await fetch("http://localhost:8001/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
 
-      setSuccess(true);
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await res.json();
 
     if (res.status === 200) {
       navigate("/homepage");
