@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import Vlogo from "../../images/vlogo.png";
 import { login } from "../../../utils/authFunctions";
@@ -7,6 +8,9 @@ import { login } from "../../../utils/authFunctions";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
   const navigate = useNavigate();
@@ -21,8 +25,18 @@ const Login = () => {
       console.log(error);
     }
 
-    if (success) {
-      navigate("/bobo");
+    if (res.status === 200) {
+      navigate("/homepage");
+      console.log(data);
+      Cookies.set("token", data.token);
+      Cookies.set("userid", data.user.id);
+      console.log(
+        "Cookies after login:",
+        Cookies.get("token"),
+        Cookies.get("userid")
+      );
+    } else {
+      console.error("Login failed:", data.message);
     }
   };
 
@@ -63,7 +77,9 @@ const Login = () => {
             Login
           </button>
 
-          <p>Don't have an account? Sign Up </p>
+          <p>
+            Don't have an account? <Link to="/signup">Sign up</Link>
+          </p>
         </form>
       </div>
       <div className="footer">

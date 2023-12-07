@@ -1,5 +1,5 @@
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import Vlogo from "../../images/vlogo.png";
 
@@ -9,23 +9,29 @@ const Signup = () => {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  // const [selectedUserType, setSelectedUserType] = useState("");
+  const [inputUserType, setInputUserType] = useState("ordinary");
+
+  const navigate = useNavigate();
 
   const addNewUser = async (e) => {
     e.preventDefault();
 
-    const form = { firstName, lastName, name: username, password, email };
+    const form = { firstName, lastName, name: username, email, password, inputUserType };
 
     const res = await fetch("http://localhost:8001/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // You might need additional headers (e.g., authentication tokens) based on the API requirements
       },
       credentials: "include",
       body: JSON.stringify(form),
     });
-    // const data = await res.json();
+
+    if (res.status === 200) {
+      navigate('/homepage'); 
+    } else {
+      console.error('Signup failed:', await res.text());
+    }
   };
 
   return (
@@ -92,6 +98,28 @@ const Signup = () => {
               }}
             />
           </div>
+          <div className="user-select">
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                value="ordinary"
+                checked={inputUserType === "ordinary"}
+                onChange={() => setInputUserType("ordinary")}
+              />
+              Ordinary User
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="userType"
+                value="corporate"
+                checked={inputUserType === "corporate"}
+                onChange={() => setInputUserType("corporate")}
+              />
+              Corporate User
+            </label>
+          </div>
           <button
             onClick={(e) => {
               addNewUser(e);
@@ -102,7 +130,10 @@ const Signup = () => {
             Sign Up
           </button>
 
-          <p>Already have an account? Log In </p>
+          <p>
+            Already have an account?{" "}
+            <Link to="/login">Log In</Link>
+          </p>
         </form>
       </div>
       <div className="footer">

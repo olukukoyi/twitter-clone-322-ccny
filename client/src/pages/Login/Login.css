@@ -16,26 +16,26 @@ body {
     align-items: center;
 }
 
-.signup-left-logo {
+.login-left-logo {
     width: 350px; 
     height: auto;
     transition: width 0.5s ease; 
 }
 
 @media (max-width: 600px) {
-    .signup {
+    .login {
         flex-direction: row; 
     }
 
-    .signup-left {
+    .login-left {
         flex: 0; 
     }
 
-    .signup-left-logo {
+    .login-left-logo {
         width: 100px;
     }
 
-    .signup-right {
+    .login-right {
         flex: 1;
     }
 }
@@ -62,7 +62,7 @@ body {
 }
   
 .form-input {
-    width: 300px; /* Adjust the width and padding as needed */
+    width: 300px; 
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -70,12 +70,12 @@ body {
 }
 
 .login-button {
-    width: 320px; /* Adjust the width and padding as needed */
+    width: 320px; 
     padding: 12px;
-    background-color: #1da1f2; /* Twitter-like primary color */
+    background-color: #1da1f2; 
     color: white;
     border: none;
-    border-radius: 20px; /* Make the button rounded */
+    border-radius: 20px; 
     cursor: pointer;
 }
   

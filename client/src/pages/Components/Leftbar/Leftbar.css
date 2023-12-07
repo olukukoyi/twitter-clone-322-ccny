@@ -1,0 +1,35 @@
+
+.leftbar {
+    flex: 0.3;
+    padding: 1rem 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    align-items: flex-end;
+}
+
+.leftbar-links {
+    
+}
+
+.leftbar-icon {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 33px;
+    width: fit-content;
+    margin: 10 px;
+  }
+
+.leftbar-icon:hover {
+    background-color: #1da1f2; /* Twitter-like hover color */
+}
+
+.leftbar-icon a {
+    text-decoration: none;
+    color: rgb(0, 0, 0); /* White color for the icons */
+}
