@@ -6,22 +6,7 @@ const getUserDetails = async (req, res) => {
     where: {
       id: id,
     },
-    include: {
-      Followers: {
-        select: {
-          personFollowingUser: {
-            select: { id: true, name: true, email: true },
-          },
-        },
-      },
-      Following: {
-        select: {
-          User: {
-            select: { id: true, name: true, email: true },
-          },
-        },
-      },
-    },
+    include: { followers: true, following: true },
   });
 
   res.json({ user: userObject });
