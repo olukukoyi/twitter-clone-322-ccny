@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Payment = () => {
-    const [balance, setBalance] = useState(0); // Initialize with 0, will be updated with actual balance from the backend
+    const [balance, setBalance] = useState(0);
     const [amount, setAmount] = useState(0);
     const [transactionType, setTransactionType] = useState(null);
 
@@ -9,7 +9,7 @@ const Payment = () => {
         const fetchPaymentData = async () => {
             try {
                 // Fetch payment data from the backend
-                const response = await fetch('http://localhost:8001/api/payment'); // Update with the actual endpoint
+                const response = await fetch('http://localhost:8001/api/payment');
                 const paymentData = await response.json();
 
                 // Setting state with fetched payment data
@@ -20,7 +20,7 @@ const Payment = () => {
         };
 
         fetchPaymentData();
-    }, []); // Empty dependency array ensures the effect runs only once on mount
+    }, []);
 
     const handleTransaction = async () => {
         try {
@@ -52,7 +52,7 @@ const Payment = () => {
             alert('Transaction failed');
         }
 
-        setAmount(0); // Reset amount after transaction
+        setAmount(0);
     };
 
     return (

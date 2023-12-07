@@ -8,15 +8,12 @@ const Settings = () => {
     const [bankAccount, setBankAccount] = useState('');
     const [selectedProfilePicture, setSelectedProfilePicture] = useState(null);
 
-    // Simulating fetching user data from a backend
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Simulating a backend response
-                const response = await fetch('http://localhost:8001/user/:id'); // Update with your actual endpoint
+                const response = await fetch('http://localhost:8001/user/:id');
                 const userData = await response.json();
 
-                // Setting state with fetched user data
                 setUsername(userData.username);
                 setEmail(userData.email);
                 setAccountType(userData.accountType);
@@ -44,7 +41,6 @@ const Settings = () => {
                 }),
             });
 
-            // Handle response...
         } catch (error) {
             console.error('Error saving user data:', error);
         }
@@ -56,7 +52,6 @@ const Settings = () => {
                 method: 'DELETE',
             });
 
-            // Handle response...
         } catch (error) {
             console.error('Error deleting user account:', error);
         }

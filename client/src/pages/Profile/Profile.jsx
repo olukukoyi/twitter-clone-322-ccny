@@ -17,11 +17,9 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Fetch user data from the backend
-        const response = await fetch('http://localhost:8001/user/:id'); // Update with the actual endpoint
+        const response = await fetch('http://localhost:8001/user/:id');
         const userDataFromBackend = await response.json();
 
-        // Update state with fetched user data
         setUserData(userDataFromBackend);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -29,7 +27,7 @@ const ProfilePage = () => {
     };
 
     fetchUserData();
-  }, []); // Empty dependency array ensures the effect runs only once on mount
+  }, []);
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
