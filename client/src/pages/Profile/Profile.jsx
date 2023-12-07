@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState('tweets');
   const [userData, setUserData] = useState({
-    username: 'JohnDoe',
-    bio: 'Web Developer',
-    profilePicture: 'https://placekitten.com/200/200', // Placeholder image URL
-    tweets: ['Tweet 1', 'Tweet 2', 'Tweet 3'], // Simulated tweet data
-    replies: ['Reply 1', 'Reply 2'], // Simulated reply data
-    media: ['Media 1', 'Media 2'], // Simulated media data
-    ads: ['Ad 1', 'Ad 2'], // Simulated ad data
-    following: 100,
-    followers: 150,
+    username: '',
+    bio: '',
+    profilePicture: '',
+    tweets: [],
+    replies: [],
+    media: [],
+    ads: [],
+    following: 0,
+    followers: 0,
   });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Fetch user data from the backend
+        const response = await fetch('http://localhost:8001/user/:id'); // Update with the actual endpoint
+        const userDataFromBackend = await response.json();
+
+        // Update state with fetched user data
+        setUserData(userDataFromBackend);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []); // Empty dependency array ensures the effect runs only once on mount
 
   const handleSectionClick = (section) => {
     setActiveSection(section);
