@@ -22,8 +22,14 @@ const Login = () => {
       console.log(error);
     }
 
-    if (success) {
-      navigate("/bobo");
+    if (res.status === 200) {
+      navigate('/homepage'); 
+      console.log(data);
+      Cookies.set("token", data.token);
+      Cookies.set("userid", data.user.id);
+      console.log("Cookies after login:", Cookies.get('token'), Cookies.get('userid'));
+    } else {
+      console.error('Login failed:', data.message);
     }
   };
 
