@@ -2,8 +2,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// taboo words
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -14,13 +12,13 @@ model User {
   email     String     @unique
   name      String?
   password  String
-  post      Post[]
-  follows   User[]     @relation(name: "Followers")
-  followers User[]     @relation(name: "Followers")
+  userType  String     @default("ordinary")
+  ads       Ads[]
   comments  Comments[]
   likes     Likes[]
-  ads       Ads[]
-  userType  String     @default("ordinary") // surfer , corportate , trendy , super, ordinary
+  post      Post[]
+  followers User[]     @relation("Followers")
+  following User[]     @relation("Followers")
 }
 
 model Post {
@@ -28,37 +26,34 @@ model Post {
   body     String
   title    String
   userId   String
-  User     User       @relation(fields: [userId], references: [id])
   comments Comments[]
   likes    Likes[]
+  User     User       @relation(fields: [userId], references: [id])
 }
-
-// create ads
 
 model Ads {
   id     String  @id @default(uuid())
   title  String
   body   String
-  User   User?   @relation(fields: [userId], references: [id])
   userId String?
+  User   User?   @relation(fields: [userId], references: [id])
 }
 
 model Comments {
   id        String   @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
-  Post      Post?    @relation(fields: [postId], references: [id])
   postId    String?
-  User      User?    @relation(fields: [userId], references: [id])
   userId    String?
+  Post      Post?    @relation(fields: [postId], references: [id])
+  User      User?    @relation(fields: [userId], references: [id])
 }
 
 model Likes {
   userId String
   postId String
-
-  user User @relation(fields: [userId], references: [id])
-  post Post @relation(fields: [postId], references: [id])
+  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
 
   @@id([userId, postId])
 }
