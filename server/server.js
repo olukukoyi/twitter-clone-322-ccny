@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
-// taboo words
+// taboo words  
 
 app = express();
 app.use(express.json());
