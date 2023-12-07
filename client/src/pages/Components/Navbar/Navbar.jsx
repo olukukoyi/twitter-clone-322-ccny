@@ -1,54 +1,90 @@
-import React, { useState } from "react";
-//import StarBorderPurple500Icon from "@mui/icons-material/StarBorderPurple500";
-import SearchIcon from "@mui/icons-material/Search";
-import { useLocation } from "react-router-dom";
-//import UserPlaceholder from "../UserPlaceholder/UserPlaceholder";
-import Vlogo from "../../../images/vlogo.png";
-import "./Navbar.css";
+import React from 'react';
 
-const Navbar = () => {
-  const [userData, setUserData] = useState(null);
-  const location = useLocation().pathname;
+const TopNavigationBar = () => {
+    const navBarStyle = {
+        backgroundColor: '#1da1f2',
+        padding: '10px',
+        display: 'grid',
+        gridTemplateColumns: 'auto 1fr auto',
+        gridColumnGap: '1rem',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '2rem 0',
+    };
 
-  return (
-    <div className="navbar-container">
-      <div className="navbar-logo">
-          <img
-          className="navbar-logo"
-          src={Vlogo}
-          alt="vlogo"
-          width={"40px"}
-        />
-      </div>
+    const logoStyle = {
+        marginLeft: '1rem',
+        width: '30px',
+    };
 
-      <div className="navbar-main">
-        <div className="navbar-title">
-          <div className="title-content">
-            <h2 className="font-bold text-2xl">
-                "Home"
-              {/* {location.includes("profile") ? (
-                <UserPlaceholder
-                  setUserData={setUserData}
-                  userData={userData}
-                />
-              ) : location.includes("explore") ? (
-                "Explore"
-              ) : (
-                "Home"
-              )} */}
-            </h2>
-          </div>
-        </div>
-      </div>
+    const searchBarContainerStyle = {
+        position: 'relative',
+        marginRight: '1rem',
+    };
 
-      <div className="navbar-search">
-        <div className="search-container">
-          <SearchIcon className="search-icon" />
-          <input type="text" className="search-input" />
-        </div>
-      </div>
-    </div>
-  );
+    const searchBarStyle = {
+        width: '100%',
+        padding: '8px',
+        border: 'none',
+        borderRadius: '20px',
+        marginLeft: '2rem',
+    };
+
+    const navLinksStyle = {
+        display: 'flex',
+        gap: '10px',
+        borderRight: '2px solid #ccc',
+        padding: '0 1rem',
+    };
+
+    const navLinkItemStyle = {
+        color: '#fff',
+        textDecoration: 'none',
+    };
+
+    const profileStyle = {
+        display: 'flex',
+        alignItems: 'center',
+    };
+
+    const profileImageStyle = {
+        width: '30px',
+        borderRadius: '50%',
+        marginRight: '5px',
+    };
+
+    const profileNameStyle = {
+        fontWeight: 'bold',
+    };
+
+    return (
+        <nav style={navBarStyle}>
+            <div style={logoStyle}>
+                <img src="twitter-logo.png" alt="Twitter Logo" />
+            </div>
+            <div style={searchBarContainerStyle}>
+                <input type="text" placeholder="Search Twitter" style={searchBarStyle} />
+            </div>
+            <div style={navLinksStyle}>
+                <a href="#" style={navLinkItemStyle}>
+                    Home
+                </a>
+                <a href="#" style={navLinkItemStyle}>
+                    Explore
+                </a>
+                <a href="#" style={navLinkItemStyle}>
+                    Notifications
+                </a>
+                <a href="#" style={navLinkItemStyle}>
+                    Messages
+                </a>
+            </div>
+            <div style={profileStyle}>
+                <img src="profile-picture.jpg" alt="Profile" style={profileImageStyle} />
+                <span style={profileNameStyle}>John Doe</span>
+            </div>
+        </nav>
+    );
 };
 
-export default Navbar;
+export default TopNavigationBar;
